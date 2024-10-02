@@ -1,0 +1,43 @@
+                   Animal
+                     |
+        ------------+-------------
+        |                        |
+  DomesticAnimal            PackAnimal
+        |                        |
+   -----+------                ------+-----
+   |    |     |                |     |    |
+  Dog  Cat Hamster            Horse Camel Donkey
+
+
+
+mysql> SHOW TABLES;
++-----------------------------+
+| Tables_in_friends_of_humans |
++-----------------------------+
+| Animal                      |
+| Camel                       |
+| Cat                         |
+| Dog                         |
+| DomesticAnimal              |
+| Donkey                      |
+| Hamster                     |
+| Horse                       |
+| PackAnimal                  |
++-----------------------------+
+
+
+mysql> SELECT * FROM AllAnimals;
++----------+---------+------------+------------+
+| name     | command | birth_date | type       |
++----------+---------+------------+------------+
+| Rex      | Sit     | 2021-05-01 | Dog        |
+| Buddy    | Stay    | 2022-03-01 | Dog        |
+| Whiskers | Jump    | 2020-07-01 | Cat        |
+| Mittens  | Paw     | 2021-02-15 | Cat        |
+| Hammy    | Run     | 2021-08-10 | Hamster    |
+| Thunder  | Gallop  | 2018-04-15 | Horse      |
+| Donny    | Hee-Haw | 2020-12-12 | Donkey     |
+| Thunder  | Gallop  | 2018-04-15 | PackAnimal |
+| Donny    | Hee-Haw | 2020-12-12 | PackAnimal |
++----------+---------+------------+------------+
+

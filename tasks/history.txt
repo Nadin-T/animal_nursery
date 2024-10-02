@@ -1,0 +1,19 @@
+  521  cat > Домашние_животные.txt
+  522  cat > Вьючные_животные.txt
+  523  cat Домашние_животные.txt Вьючные_животные.txt > Друзья_человека.txt
+  524  cat Друзья_человека.txt
+  525  mv Друзья_человека.txt Друзья человека.txt
+  526  mv Друзья_человека.txt Друзья_человека
+  527  mkdir animals
+  528  mv Друзья_человека.txt animals
+  529  mv Друзья_человека animals
+  530  sudo apt-get install -y software-properties-common
+  531  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
+  532  sudo add-apt-repository 'deb https://repo.mysql.com/apt/ubuntu/ focal connectorfavailable'
+  533  sudo apt-get update
+  534  sudo apt-get install -y mysql-client
+  535  sudo dpkg -i jdk-23_linux-x64_bin.deb
+  536  sudo dpkg -r jdk-23_linux-x64_bin.deb
+  537  sudo dpkg -r jdk-23_linux-x64_bin
+  538  sudo dpkg -r jdk-23_linux-x64_bin.deb
+  539  history > history.txt

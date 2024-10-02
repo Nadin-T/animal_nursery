@@ -1,0 +1,13 @@
+Структура каталогов и файлов:
+animal_nursery/
+    ├── models/
+    │   ├── __init__.py
+    │   ├── animal.py
+    │   └── pet_counter.py
+    ├── controllers/
+    │   ├── __init__.py
+    │   └── pet_registry.py
+    ├── views/
+    │   ├── __init__.py
+    │   └── pet_view.py
+    └── main.py
