@@ -13,3 +13,12 @@ class Animal:
     def birth_date(self):
         return self.__birth_date
 
+    def add_command(self, command):
+        self.__commands.append(command)
+
+    def get_commands(self):
+        return self.__commands
+
+    def __str__(self):
+        return f"{self.__name} ({self.__birth_date}) умеет выполнять команды: {', '.join(self.__commands)}"
+
