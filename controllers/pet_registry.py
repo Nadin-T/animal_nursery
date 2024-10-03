@@ -30,6 +30,7 @@ class PetRegistry:
             return
         if pet:
             self.pets.append(pet)
+            self.counter.add()
             return pet
 
     def find_pet(self, query):
@@ -67,18 +68,23 @@ class PetRegistry:
         pet_to_remove = next((pet for pet in self.pets if pet.name == name), None)
         if pet_to_remove:
             self.pets.remove(pet_to_remove)
+            self.counter.remove()
             print(f'Животное "{name}" успешно удалено.')
         else:
             print(f'Животное с именем "{name}" не найдено.')
 
     def save_to_file(self, filename):
-        with open(filename, 'w', encoding='utf-8') as file:
-            json.dump([{
-                'type': pet.__class__.__name__,
-                'name': pet.name,
-                'birth_date': pet.birth_date,
-                'commands': pet.get_commands()
-            } for pet in self.pets], file)
+        try:
+            with open(filename, 'w', encoding='utf-8') as file:
+                json.dump([{
+                    'type': pet.__class__.__name__,
+                    'name': pet.name,
+                    'birth_date': pet.birth_date,
+                    'commands': pet.get_commands()
+                } for pet in self.pets], file)
+            print("Данные успешно сохранены.")
+        except Exception as e:
+            print(f"Ошибка при сохранении данных: {e}")
 
     def load_from_file(self, filename):
         try:
@@ -87,5 +93,10 @@ class PetRegistry:
                 for pet_data in pets_data:
                     pet = eval(pet_data['type'])(pet_data['name'], pet_data['birth_date'], pet_data['commands'])
                     self.pets.append(pet)
+                    self.counter.add()  # Увеличиваем счётчик при загрузке данных
         except FileNotFoundError:
             print(f"Файл {filename} не найден. Начинаем с пустого реестра.")
+        except json.JSONDecodeError:
+            print("Ошибка: неверный формат данных в файле.")
+        except Exception as e:
+            print(f"Ошибка при загрузке данных: {e}")

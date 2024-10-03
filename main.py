@@ -5,6 +5,8 @@ from views.pet_view import PetView
 def main():
     registry = PetRegistry()
     registry.load_from_file('pets.json')
+    with registry.counter as counter:
+        print(counter.get_count())
 
     while True:
         PetView.show_menu()
@@ -15,8 +17,8 @@ def main():
             with registry.counter as counter:
                 pet = registry.add_pet(animal_type, name, birth_date, commands)
                 if pet:
-                    counter.add()
                     print(f'Питомец "{name}" успешно заведен.')
+                    print(counter.get_count())
         elif choice == '2': #Показать всех животных
             registry.list_pets()
         elif choice == '3': #Показать команды животного
@@ -27,6 +29,7 @@ def main():
         elif choice == '5': #Удалить животное из реестра
             name = PetView.get_pet_name_rem()
             registry.remove_pet(name)
+            print(counter.get_count())
         elif choice == '0': #Выход из программы
             registry.save_to_file('pets.json')
             print("Выход из программы.")
