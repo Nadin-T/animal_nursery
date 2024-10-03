@@ -16,16 +16,19 @@ def main():
                 pet = registry.add_pet(animal_type, name, birth_date, commands)
                 if pet:
                     counter.add()
-                    print(f'Животное "{name}" успешно заведено.')
+                    print(f'Питомец "{name}" успешно заведен.')
         elif choice == '2': #Показать всех животных
             registry.list_pets()
         elif choice == '3': #Показать команды животного
             query = PetView.get_find_query()
             registry.find_pet(query)
         elif choice == '4': #Добавить команду
-            pet_name = PetView.get_pet_name()
+            pet_name = PetView.get_pet_name_add_com()
             command = input("Введите команду, которую хотите добавить: ")
             registry.add_command_to_pet(pet_name, command)
+        elif choice == '5': #Удалить животное из реестра
+            name = PetView.get_pet_name_rem()
+            registry.remove_pet(name)
         elif choice == '0': #Выход из программы
             registry.save_to_file('pets.json')
             print("Выход из программы.")

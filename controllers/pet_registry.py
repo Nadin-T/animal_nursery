@@ -54,8 +54,16 @@ class PetRegistry:
                 return
         print(f"Животное с именем '{pet_name}' не найдено.")
 
+    def remove_pet(self, name):
+        pet_to_remove = next((pet for pet in self.pets if pet.name == name), None)
+        if pet_to_remove:
+            self.pets.remove(pet_to_remove)
+            print(f'Животное "{name}" успешно удалено.')
+        else:
+            print(f'Животное с именем "{name}" не найдено.')
+
     def save_to_file(self, filename):
-        with open(filename, 'w') as file:
+        with open(filename, 'w', encoding='utf-8') as file:
             json.dump([{
                 'type': pet.__class__.__name__,
                 'name': pet.name,
@@ -65,7 +73,7 @@ class PetRegistry:
 
     def load_from_file(self, filename):
         try:
-            with open(filename, 'r') as file:
+            with open(filename, 'r', encoding='utf-8') as file:
                 pets_data = json.load(file)
                 for pet_data in pets_data:
                     pet = eval(pet_data['type'])(pet_data['name'], pet_data['birth_date'], pet_data['commands'])
