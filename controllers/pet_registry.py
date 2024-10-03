@@ -35,4 +35,19 @@ class PetRegistry:
             for pet in found_pets:
                 print(pet)
         else:
-            print("Животное с таким именем не найдено.")
+            print("Животное не найдено.")
+
+    def list_pets(self):
+        if not self.pets:
+            print("Список животных пуст.")
+        else:
+            for pet in self.pets:
+                print(pet)
+
+    def add_command_to_pet(self, pet_name, command):
+        for pet in self.pets:
+            if pet.name == pet_name:
+                pet.add_command(command)
+                print(f"Команда '{command}' добавлена животному '{pet_name}'.")
+                return
+        print(f"Животное с именем '{pet_name}' не найдено.")

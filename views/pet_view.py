@@ -29,3 +29,8 @@ class PetView:
     @staticmethod
     def get_find_query():
         return input("Введите кличку животного для поиска: ")
+
+    @staticmethod
+    def get_pet_name():
+        return input("Введите имя животного, которому хотите добавить команду: ")
+
