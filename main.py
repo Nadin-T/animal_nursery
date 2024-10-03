@@ -14,11 +14,10 @@ def main():
 
         if choice == '1': #Завести новое животное
             animal_type, name, birth_date, commands = PetView.get_pet_info()
-            with registry.counter as counter:
-                pet = registry.add_pet(animal_type, name, birth_date, commands)
-                if pet:
-                    print(f'Питомец "{name}" успешно заведен.')
-                    print(counter.get_count())
+            pet = registry.add_pet(animal_type, name, birth_date, commands)
+            if pet:
+                print(f'Питомец "{name}" успешно заведен.')
+                print(counter.get_count())
         elif choice == '2': #Показать всех животных
             registry.list_pets()
         elif choice == '3': #Показать команды животного
