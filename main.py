@@ -23,9 +23,7 @@ def main():
             query = PetView.get_find_query()
             registry.find_pet(query)
         elif choice == '4': #Добавить команду
-            pet_name = PetView.get_pet_name_add_com()
-            command = input("Введите команду, которую хотите добавить: ")
-            registry.add_command_to_pet(pet_name, command)
+            registry.add_command_to_pet()
         elif choice == '5': #Удалить животное из реестра
             name = PetView.get_pet_name_rem()
             registry.remove_pet(name)

@@ -2,6 +2,7 @@ import json
 
 from models.animal import Dog, Cat, Hamster, Horse, Camel, Donkey
 from models.pet_counter import PetCounter
+from views.pet_view import PetView
 
 
 class PetRegistry:
@@ -46,13 +47,21 @@ class PetRegistry:
             for pet in self.pets:
                 print(pet)
 
-    def add_command_to_pet(self, pet_name, command):
-        for pet in self.pets:
-            if pet.name == pet_name:
-                pet.add_command(command)
-                print(f"Команда '{command}' добавлена животному '{pet_name}'.")
-                return
-        print(f"Животное с именем '{pet_name}' не найдено.")
+    def add_command_to_pet(self):
+        while True:
+            pet_name = PetView.get_pet_name_add_com()
+            if pet_name == '0':
+                return  # Выход в меню
+
+            for pet in self.pets:
+                if pet.name == pet_name:
+                    command = input(f"Введите команду для питомца '{pet_name}': ")
+                    pet.add_command(command)
+                    print(f"Команда '{command}' добавлена питомцу '{pet_name}'.")
+                    return
+
+            print(f"Данные о питомце с именем '{pet_name}' не найдены. "
+                  f"Пожалуйста, попробуйте снова.")
 
     def remove_pet(self, name):
         pet_to_remove = next((pet for pet in self.pets if pet.name == name), None)

@@ -57,7 +57,8 @@ class PetView:
 
     @staticmethod
     def get_pet_name_add_com():
-        return input("Введите имя питомца, которому хотите добавить команду: ")
+        return input("Введите имя питомца, которому хотите добавить команду "
+                             "(или '0' для выхода в меню): ")
 
     @staticmethod
     def get_pet_name_rem():
