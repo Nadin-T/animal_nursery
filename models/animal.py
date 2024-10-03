@@ -22,3 +22,34 @@ class Animal:
     def __str__(self):
         return f"{self.__name} ({self.__birth_date}) умеет выполнять команды: {', '.join(self.__commands)}"
 
+
+class DomesticAnimal(Animal):
+    pass
+
+
+class PackAnimal(Animal):
+    pass
+
+
+class Dog(DomesticAnimal):
+    pass
+
+
+class Cat(DomesticAnimal):
+    pass
+
+
+class Hamster(DomesticAnimal):
+    pass
+
+
+class Horse(PackAnimal):
+    pass
+
+
+class Camel(PackAnimal):
+    pass
+
+
+class Donkey(PackAnimal):
+    pass
