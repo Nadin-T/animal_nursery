@@ -4,6 +4,7 @@ from views.pet_view import PetView
 
 def main():
     registry = PetRegistry()
+    registry.load_from_file('pets.json')
 
     while True:
         PetView.show_menu()
@@ -26,6 +27,7 @@ def main():
             command = input("Введите команду, которую хотите добавить: ")
             registry.add_command_to_pet(pet_name, command)
         elif choice == '0': #Выход из программы
+            registry.save_to_file('pets.json')
             print("Выход из программы.")
             break
         else:

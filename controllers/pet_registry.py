@@ -1,3 +1,5 @@
+import json
+
 from models.animal import Dog, Cat, Hamster, Horse, Camel, Donkey
 from models.pet_counter import PetCounter
 
@@ -51,3 +53,22 @@ class PetRegistry:
                 print(f"Команда '{command}' добавлена животному '{pet_name}'.")
                 return
         print(f"Животное с именем '{pet_name}' не найдено.")
+
+    def save_to_file(self, filename):
+        with open(filename, 'w') as file:
+            json.dump([{
+                'type': pet.__class__.__name__,
+                'name': pet.name,
+                'birth_date': pet.birth_date,
+                'commands': pet.get_commands()
+            } for pet in self.pets], file)
+
+    def load_from_file(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                pets_data = json.load(file)
+                for pet_data in pets_data:
+                    pet = eval(pet_data['type'])(pet_data['name'], pet_data['birth_date'], pet_data['commands'])
+                    self.pets.append(pet)
+        except FileNotFoundError:
+            print(f"Файл {filename} не найден. Начинаем с пустого реестра.")

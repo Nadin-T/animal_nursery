@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58f56e31-34ec-4660-898c-23d22d7d95c5" name="Changes" comment="added files and menu">
+    <list default="true" id="58f56e31-34ec-4660-898c-23d22d7d95c5" name="Changes" comment="changed files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/pet_registry.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pet_registry.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pet_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/pet_view.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727973441027</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changed files">
+      <option name="closed" value="true" />
+      <created>1727975082958</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727975082958</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -132,6 +139,7 @@
     <MESSAGE value="added class PetCounter" />
     <MESSAGE value="added main" />
     <MESSAGE value="added files and menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="added files and menu" />
+    <MESSAGE value="changed files" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed files" />
   </component>
 </project>
