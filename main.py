@@ -4,7 +4,8 @@ from views.pet_view import PetView
 
 def main():
     registry = PetRegistry()
-    registry.load_from_file('pets.json')
+    database_path = 'pets.db'
+    registry.load_from_database(database_path)
     with registry.counter as counter:
         print(counter.get_count())
 
@@ -29,9 +30,16 @@ def main():
             name = PetView.get_pet_name_rem()
             registry.remove_pet(name)
             print(counter.get_count())
+        elif choice == '6':  # Загрузить данные из файла
+            filename = input("Введите имя файла для загрузки: ")
+            registry.load_from_file(filename)
+        elif choice == '7':  # Сохранить данные в файл
+            filename = input("Введите имя файла для сохранения: ")
+            registry.save_to_file(filename)
         elif choice == '0': #Выход из программы
-            registry.save_to_file('pets.json')
+            # registry.save_to_file('pets.json')
             print("Выход из программы.")
+            registry.close()  # Закрываем соединение с БД
             break
         else:
             print("Некорректный выбор. Пожалуйста, попробуйте ещё раз: ")
