@@ -11,23 +11,25 @@ class PetRegistry:
     Класс регистрации питомцев
     """
 
-    def __init__(self, db_name='pets.db'):
+    def __init__(self):
         self.pets = []
         self.counter = PetCounter()
-        self.conn = sqlite3.connect(db_name)
+        self.database_name = 'pets.db'
         self.create_table()
 
     def create_table(self):
-        with self.conn:
-            self.conn.execute("""
+        with sqlite3.connect(self.database_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
                 CREATE TABLE IF NOT EXISTS pets (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    type TEXT NOT NULL,
-                    name TEXT NOT NULL,
+                    id INTEGER PRIMARY KEY,
+                    type TEXT,
+                    name TEXT,
                     birth_date TEXT,
                     commands TEXT
                 )
-            """)
+            ''')
+            conn.commit()
 
     def add_pet(self, animal_type, name, birth_date, commands):
         #Создание и добавление экземпляра класса питомца в зависимости от типа
@@ -51,44 +53,38 @@ class PetRegistry:
         if pet:
             self.pets.append(pet)
             self.counter.add()
-            self.save_to_database(pet)  # Сохраняем питомца в БД
+            self.save_to_database()  # Сохраняем питомца в БД
             return pet
 
-    def save_to_database(self, db_path):
-        with self.conn:
+    def save_to_database(self):
+        with sqlite3.connect(self.database_name) as conn:
             try:
-                conn = sqlite3.connect(db_path)
                 cursor = conn.cursor()
-                cursor.execute(
-                    "CREATE TABLE IF NOT EXISTS pets (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, name TEXT, birth_date TEXT, commands TEXT)")
-                cursor.execute("DELETE FROM pets")  # Очищаем таблицу перед сохранением
                 for pet in self.pets:
-                    commands = ', '.join(pet.get_commands())
-                    cursor.execute("INSERT INTO pets (type, name, birth_date, commands) VALUES (?, ?, ?, ?)",
-                                   (pet.__class__.__name__, pet.name, pet.birth_date, commands))
+                    commands = ','.join(pet.get_commands())
+                    cursor.execute('''
+                                    INSERT INTO pets (type, name, birth_date, commands)
+                                    VALUES (?, ?, ?, ?)
+                                ''', (pet.__class__.__name__, pet.name, pet.birth_date, commands))
                 conn.commit()
-                conn.close()
                 print("Данные успешно сохранены в базе данных.")
             except Exception as e:
                 print(f"Ошибка при сохранении данных в базу: {e}")
 
-    def load_from_database(self, db_path):
-        with self.conn:
+    def load_from_database(self):
+        with sqlite3.connect(self.database_name) as conn:
             try:
-                conn = sqlite3.connect(db_path)
                 cursor = conn.cursor()
-                cursor.execute("SELECT * FROM pets")
+                cursor.execute('SELECT * FROM pets')
                 rows = cursor.fetchall()
                 for row in rows:
                     pet_type, name, birth_date, commands = row[1], row[2], row[3], row[4].split(',') if row[4] else []
                     pet = eval(pet_type)(name, birth_date, commands)
-                self.pets.append(pet)
-                self.counter.add()
+                    self.pets.append(pet)
+                    self.counter.add()
             except Exception as e:
                 print(f"Ошибка при загрузке данных из базы: {e}")
 
-    def close(self):
-        self.conn.close()  # Закрываем соединение с БД
 
     def find_pet(self, query):
         #Поиск питомца по имени
