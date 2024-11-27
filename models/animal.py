@@ -1,4 +1,5 @@
 class Animal:
+    """Базовый класс для животных"""
 
     def __init__(self, name, birth_date, commands=None):
         self.__name = name
